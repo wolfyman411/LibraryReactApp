@@ -28,7 +28,7 @@ function App() {
           <Route path="/" exact Component={() => <Home books={books}/>}/>
           <Route path="/books" exact Component={() => <Books books={books}/>}/>
           <Route path="/cart" exact Component={() => <Cart books={books}/>}/>
-          <Route path="/books/:id" Component={() => <BookInfo books={books} addToCart={addToCart}/>}/>
+          <Route path="/books/:id" Component={() => <BookInfo books={books} addToCart={addToCart} cart={cart}/>}/>
         </Routes>
         <Footer />
       </div>

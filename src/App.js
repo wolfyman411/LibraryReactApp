@@ -7,7 +7,6 @@ import BookInfo from './pages/BookInfo';
 import {books} from "./data"
 import Cart from './pages/Cart';
 import { useEffect, useState } from 'react';
-import { faArrowDownUpLock } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [cart, setCart] = useState([])

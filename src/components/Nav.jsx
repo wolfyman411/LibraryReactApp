@@ -17,7 +17,7 @@ export default function Nav({numberOfItems}) {
     <div>
       <nav className="nav__container">
         <Link to="/">
-            <img src={LibraryLogo} className='logo'></img>
+            <img src={LibraryLogo} className='logo' alt=""></img>
         </Link>
         <ul className='nav__links'>
             <li className='nav__list'>

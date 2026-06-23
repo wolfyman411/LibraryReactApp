@@ -23,7 +23,7 @@ export default function Book({book}) {
             //Unmounts
             mountedRef.current = false
         }
-    }, [])
+    }, [book.url])
 
     function skeletonBook() {
         return (

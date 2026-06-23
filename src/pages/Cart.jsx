@@ -1,6 +1,18 @@
 import React from 'react'
+import CartItem from '../components/ui/CartItem'
+import EmptyCart from "../assets/empty_cart.svg"
+import { Link } from 'react-router-dom'
 
-export default function Cart() {
+export default function Cart({cart, changeQuantity, removeFromCart}) {
+
+    const total = () => {
+        let counter = 0
+        cart.forEach(item => {
+            counter += +((item.salePrice || item.originalPrice) * item.quantity)
+        })
+        return counter
+    }
+
   return (
     <div id="books__body">
         <main id="books__main">
@@ -17,46 +29,36 @@ export default function Cart() {
                         </div>
                     </div>
                     <div className="cart__body">
-                        <div className="cart__item">
-                            <div className="cart__book">
-                                <img src="" alt="" className='cart__book--img'/>
-                                <div className="cart__book--info">
-                                    <span className="cart__book--title">
-                                        Title
-                                    </span>
-                                    <span className="cart__book--price">
-                                        $10.00
-                                    </span>
-                                    <button className="cart__book--remove">
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="cart__quantity">
-                                <input type="number" min={0} max={99} className='cart__input'/>
-                            </div>
-                            <div className="cart__total">
-                                $10.00
-                            </div>
-                        </div>
+                        {
+                            cart.map(book => {
+                                return <CartItem book={book} changeQuantity={changeQuantity} removeFromCart={removeFromCart}/>
+                            })
+                        }
                     </div>
-                    <div className="total">
+                    {cart.length === 0 && <div className="cart__empty">
+                        <img src={EmptyCart} className="cart__empty--img" alt="" />
+                        <h2>You don't have any books in your cart!</h2>
+                        <Link to="/books">
+                            <button className='btn'>Browse books</button>
+                        </Link>
+                    </div>}
+                    {cart.length > 0 && <div className="total">
                         <div className="total__item total__sub-total">
                             <span>Subtotal</span>
-                            <span>$9.00</span>
+                            <span>${(total()).toFixed(2)}</span>
                         </div>
                         <div className="total__item total__tax">
                             <span>Tax</span>
-                            <span>$1.00</span>
+                            <span>${(total()*0.1).toFixed(2)}</span>
                         </div>
                         <div className="total__item total__price">
                             <span>Total</span>
-                            <span>$10.00</span>
+                            <span>${(total()*1.1).toFixed(2)}</span>
                         </div>
                         <button className="btn btn__checkout no-cursor" onClick={() => alert("Not implemented yet!")}>
                             Proceed to checkout
                         </button>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </main>
